@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdint.h>
+
+uint16_t rearrange_hex(uint16_t input) {
+    uint8_t high_byte = (input >> 8) & 0xFF;
+    uint8_t low_byte = input & 0xFF;
+    
+    // Swap the nibbles of the high byte
+    uint8_t new_high = ((high_byte & 0xF0) >> 4) | ((high_byte & 0x0F) << 4);
+    
+    // Swap the nibbles of the low byte
+    uint8_t new_low = ((low_byte & 0xF0) >> 4) | ((low_byte & 0x0F) << 4);
+    
+    // Combine the new bytes into a 16-bit value
+    return (new_high << 8) | new_low;
+}
+
+int main() {
+    uint16_t input = 0x1234;
+    uint16_t output = rearrange_hex(input);
+    
+    printf("Input: 0x%04X\n", input);
+    printf("Output: 0x%04X\n", output);
+    
+    return 0;
+}

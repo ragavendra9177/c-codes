@@ -1,0 +1,113 @@
+//Create two threads – one thread does bubble sort and other does quick sort on array of 1000 integers (0 to 999 – arranged randomly) and find time taken by each thread to complete the sorting ---   Quick sort should take less time than bubble sort right?  You can have same data in two different arrays and each thread will work on different array
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <time.h>
+
+#define ARRAY_SIZE 1000
+
+// Global arrays for sorting
+int array_bubble[ARRAY_SIZE];
+int array_quick[ARRAY_SIZE];
+
+// Function to swap two elements in the array
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+// Bubble Sort function
+void bubble_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(&arr[j], &arr[j + 1]);
+            }
+        }
+    }
+}
+
+// Partition function for Quick Sort
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+// Quick Sort function
+void quick_sort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+
+        quick_sort(arr, low, pi - 1);
+        quick_sort(arr, pi + 1, high);
+    }
+}
+
+// Thread function for Bubble Sort
+void* bubble_sort_thread(void* arg) {
+    clock_t start_time, end_time;
+    double execution_time;
+
+    start_time = clock();
+    bubble_sort(array_bubble, ARRAY_SIZE);
+    end_time = clock();
+
+    execution_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+    printf("Bubble Sort Time: %f seconds\n", execution_time);
+
+    pthread_exit(NULL);
+}
+
+// Thread function for Quick Sort
+void* quick_sort_thread(void* arg) {
+    clock_t start_time, end_time;
+    double execution_time;
+
+    start_time = clock();
+    quick_sort(array_quick, 0, ARRAY_SIZE - 1);
+    end_time = clock();
+
+    execution_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+    printf("Quick Sort Time: %f seconds\n", execution_time);
+
+    pthread_exit(NULL);
+}
+
+int main() {
+    srand(time(NULL)); // Seed for random number generation
+
+    // Initialize arrays with random values
+    for (int i = 0; i < ARRAY_SIZE; i++) {
+        array_bubble[i] = rand() % ARRAY_SIZE; // Random numbers between 0 to 999
+        array_quick[i] = array_bubble[i]; // Copy to quick sort array
+    }
+
+    pthread_t tid_bubble_sort, tid_quick_sort;
+    pthread_attr_t attr;
+
+    pthread_attr_init(&attr);
+
+    // Create threads for Bubble Sort and Quick Sort
+    pthread_create(&tid_bubble_sort, &attr, bubble_sort_thread, NULL);
+    pthread_create(&tid_quick_sort, &attr, quick_sort_thread, NULL);
+
+    // Wait for threads to finish
+    pthread_join(tid_bubble_sort, NULL);
+    pthread_join(tid_quick_sort, NULL);
+
+    pthread_attr_destroy(&attr);
+
+    return 0;
+}

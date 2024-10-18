@@ -1,0 +1,37 @@
+//Write a program to compare two strings without using strcmp() function.
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char s1[] = "hgghj";
+    char s2[] = "hgghj";
+    
+    int i = 0;
+    char *ptr1 = s1;
+    char *ptr2 = s2;
+    
+    int length1 = strlen(s1);
+    int length2 = strlen(s2);
+    
+    // Compare strings character by character
+    if (length1 == length2) {
+        while (i < length1) {
+            if (ptr1[i] != ptr2[i]) {
+                break; // Exit loop if characters differ
+            }
+            i++;
+        }
+    }
+    
+    // Check if strings are equal or not and print the result
+    if (i >= length1) {
+        printf("The strings \"%s\" and \"%s\" are the same.\n", s1, s2);
+    } else {
+        printf("The strings \"%s\" and \"%s\" are not the same.\n", s1, s2);
+    }
+    
+    return 0;
+}

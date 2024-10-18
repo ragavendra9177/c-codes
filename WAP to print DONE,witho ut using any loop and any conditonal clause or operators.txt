@@ -1,0 +1,9 @@
+//WAP to print DONE,witho ut using any loop and any conditonal clause or operators. 
+
+
+#include <stdio.h>
+
+int main() {
+    printf("DONE\n");
+    return 0;
+}

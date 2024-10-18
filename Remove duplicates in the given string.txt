@@ -1,0 +1,108 @@
+//Remove duplicates in the given string
+
+
+#include <stdio.h>
+#include <string.h>
+
+void removeDuplicates(char *str) {
+    int length = strlen(str);
+    if (length < 2) return; // No duplicates if string length is 0 or 1
+
+    int index = 0; // Index for the result string
+
+    // Traverse the string
+    for (int i = 0; i < length; i++) {
+        int j;
+        // Check if str[i] is already present in the result
+        for (j = 0; j < index; j++) {
+            if (str[i] == str[j]) {
+                break; // Found a duplicate, skip adding it to the result
+            }
+        }
+        // If str[i] is not present in the result, add it
+        if (j == index) {
+            str[index++] = str[i];
+        }
+    }
+    str[index] = '\0'; // Null-terminate the result string
+}
+
+int main() {
+    char str[30];
+
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    removeDuplicates(str);
+
+    printf("String after removing duplicates: %s\n", str);
+
+    return 0;
+}
+
+
+
+
+
+
+
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <string.h>
+
+void remove_duplicates(int *,int);
+
+int main()
+{
+    int n=5;
+    int i;
+    int arr[10];
+    for(i = 0; i<n; i++) {
+        scanf("%d",&arr[i]);
+    }
+    
+    remove_duplicates(arr,n);
+    
+    return 0;
+}
+
+
+void remove_duplicates(int *str,int n)
+{
+   int m=0,i,j;
+   
+   for(i=0;i<n;i++)
+   {
+       for(j=0;j<m;j++)
+       {
+           if(str[i]==str[j])
+           {
+               break;
+           }
+       }
+       
+       if(j==m)
+       {
+         str[m++]=str[i];
+       }
+      
+   }
+    for(i = 0; i < m; i++) {
+        printf("%d",str[i]);
+    }
+}
+
+
+
+
+
+
+
+

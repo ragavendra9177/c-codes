@@ -1,0 +1,46 @@
+//Write a program to delete a specified line from a text file.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp, *temp;
+    char c;
+    int countline = 1;// variable declared to count the lines 
+    int deletedline;
+
+    printf("Enter the line number to delete: ");
+    scanf("%d", &deletedline);
+
+    fp = fopen("filehandle.txt", "r");
+    if (fp == NULL) {
+        printf("File not found.\n");
+        exit(1);
+    }
+
+    temp = fopen("temp.txt", "w");
+    if (temp == NULL) {
+        printf("Temporary file could not be opened.\n");
+        exit(1);
+    }
+
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == '\n') {
+            countline++;
+        }
+        if (countline != deletedline) {
+            fputc(c, temp);
+        }
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove("filehandle.txt");
+    rename("temp.txt", "filehandle.txt");
+
+    printf("Line %d deleted successfully.\n", deletedline);
+
+    return 0;
+}

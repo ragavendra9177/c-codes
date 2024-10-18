@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+void printDONE() {
+    printf("DONE");
+}
+
+int main() {
+    printDONE();
+    return 0;
+}

@@ -1,0 +1,26 @@
+//Write a program to generate the Fibonacci series.
+
+
+#include <stdio.h>
+
+int main() {
+    int fibonacci[20]; // Array to store Fibonacci series
+    int i = 0;
+
+    // Initialize the first two elements of the Fibonacci series
+    scanf("%d", &fibonacci[i++]);
+    scanf("%d", &fibonacci[i++]);
+
+    // Generate Fibonacci series
+    for (i; i < 20; i++) {
+        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+    }
+
+    // Display Fibonacci series
+    printf("Fibonacci series:\n");
+    for (i = 0; i < 20; i++) {
+        printf("%d\n", fibonacci[i]);
+    }
+
+    return 0;
+}

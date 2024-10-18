@@ -1,0 +1,63 @@
+//Write a program to replace a specified line in a text file.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp, *temp;
+    char c;
+    int countline = 1;
+    int deletedline;
+    char line[50];
+
+    printf("Enter the line number to replace: ");
+    scanf("%d", &deletedline);
+    getchar(); // Consume newline character left in input buffer
+
+    printf("Enter the new content for the line:\n");
+    fgets(line, sizeof(line), stdin);
+
+    fp = fopen("filehandle.txt", "r");
+    if (fp == NULL) {
+        printf("File not found.\n");
+        exit(1);
+    }
+
+    temp = fopen("temp.txt", "w");
+    if (temp == NULL) {
+        printf("Temporary file could not be opened.\n");
+        exit(1);
+    }
+
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == '\n') {
+            countline++;
+        }
+        if (countline == deletedline) {
+            char *ptr=line;
+            while(ptr)
+            {
+               fputc(*ptr,temp);
+               ptr++;
+            }
+           countline++;
+
+            // Skip the existing line in the original file
+            while ((c = fgetc(fp)) != EOF && c != '\n');
+                     
+        } 
+        else {
+            fputc(c, temp); // Copy current character from original to temporary file
+        }
+    }
+
+    fclose(fp);
+    fclose(temp);
+
+    remove("filehandle.txt");
+    rename("temp.txt", "filehandle.txt");
+
+    printf("Line %d replaced successfully.\n", deletedline);
+
+    return 0;
+}

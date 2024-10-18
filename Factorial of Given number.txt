@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+// Function prototype for calculating the factorial of a number
+unsigned int calculate_factorial(unsigned int n);
+
+int main() {
+    unsigned int number; // Variable to store the input number
+    unsigned int factorial_value; // Variable to store the calculated factorial value
+    
+    // Read a positive number from the user
+    // Factorial is not defined for negative numbers
+    printf("Enter a positive number: ");
+    scanf("%u", &number);
+    
+    // Calculate the factorial of the input number
+    factorial_value = calculate_factorial(number);
+    
+    // Print the factorial value
+    printf("Factorial of %u is %u\n", number, factorial_value);
+
+    return 0;
+}
+
+// Function to calculate the factorial of a given number using recursion
+unsigned int calculate_factorial(unsigned int n) {
+    // Base case: factorial of 0 or 1 is 1
+    if ((n == 0) || (n == 1)) {
+        return 1;
+    } else {
+        // Recursive case: n! = n * (n-1)!
+        return n * calculate_factorial(n - 1);
+    }
+}

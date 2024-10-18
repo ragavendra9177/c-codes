@@ -1,0 +1,22 @@
+//swap two numbers without using a temporary variable.
+
+
+#include <stdio.h>
+
+int main() {
+    int num1 = 10; // First number
+    int num2 = 5;  // Second number
+    
+    // Displaying the original values of num1 and num2
+    printf("Before Swapping, num1 = %d and num2 = %d\n", num1, num2);
+    
+    // Swapping without using a temporary variable
+    num1 = num1 + num2;
+    num2 = num1 - num2;
+    num1 = num1 - num2;
+    
+    // Displaying the swapped values of num1 and num2
+    printf("After Swapping, num1 = %d and num2 = %d\n", num1, num2);
+
+    return 0;
+}

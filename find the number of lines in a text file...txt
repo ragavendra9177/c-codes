@@ -1,0 +1,30 @@
+//Write a program to find the number of lines in a text file..
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp;
+    char c;
+    int countline = 0; // Initialize countline to 0
+
+    fp = fopen("filehandle.txt", "r");
+    if (fp == NULL) {
+        printf("File not found.\n");
+        exit(1);
+    }
+
+    // Count lines in the file
+    while ((c = fgetc(fp)) != EOF) {
+        if (c == '\n') {
+            countline++;
+        }
+    }
+
+    fclose(fp);
+
+    printf("Number of lines in the file: %d\n", countline);
+
+    return 0;
+}

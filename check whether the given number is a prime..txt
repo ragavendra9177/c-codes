@@ -1,0 +1,47 @@
+//Write a program to check whether the given number is a prime.
+
+
+
+#include <stdio.h>
+#include <stdbool.h>
+
+// Function to check if a number is prime
+bool is_prime(int number) {
+    if (number <= 1) {
+        return false; // 1 is not a prime number
+    }
+    
+    int divisor_limit = number / 2; // Limit for checking divisors
+    int i;
+    
+    // Check divisibility from 2 up to divisor_limit
+    for (i = 2; i <= divisor_limit; i++) {
+        if (number % i == 0) {
+            return false; // If number is divisible by i, it's not prime
+        }
+    }
+    
+    // If no divisors found, number is prime
+    return true;
+}
+
+int main() {
+    int number;
+    bool isPrime;
+    
+    // Input number from user
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    // Check if the number is prime using the is_prime function
+    isPrime = is_prime(number);
+    
+    // Output the result based on isPrime
+    if (isPrime) {
+        printf("The number %d is a prime number.\n", number);
+    } else {
+        printf("The number %d is not a prime number.\n", number);
+    }
+    
+    return 0;
+}

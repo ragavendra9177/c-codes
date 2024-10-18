@@ -1,0 +1,36 @@
+// Write a program to check whether the given number is a palindrome c number.
+
+
+#include <stdio.h>
+#include <stdbool.h>
+
+// Function to check if a number is a palindrome
+    bool is_palindrome(int number) {
+    int original = number;
+    int reversed = 0;
+    
+    // Reverse the number
+    while (number) {
+        int digit = number % 10;
+        reversed = reversed * 10 + digit;
+        number /= 10;
+    }
+    
+    // Check if original number and reversed number are the same
+    return (original == reversed);
+}
+
+int main() {
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    // Check if the number is a palindrome using is_palindrome function
+    if (is_palindrome(number)) {
+        printf("Given number %d is a palindrome.\n", number);
+    } else {
+        printf("Given number %d is not a palindrome.\n", number);
+    }
+    
+    return 0;
+}

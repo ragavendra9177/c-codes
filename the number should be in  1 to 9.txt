@@ -1,0 +1,41 @@
+//Write a C program which asks the user for a number between 1 to 9 and shows the number. If the user
+inputs a number out of the specified range, the program should show an error and prompt the user for a
+valid input.
+
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isValidNumber(int number) {
+    int validNumbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    
+    // Check if the given number is in the array of valid numbers
+    for (int i = 0; i < 9; i++) {
+        if (number == validNumbers[i]) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+int main() {
+    int number;
+    bool isValid = false;
+    
+    printf("Enter a number between 1 to 9: ");
+    scanf("%d", &number);
+    
+    // Validate the number until it is within the specified range
+    while (!isValid) {
+        if (!isValidNumber(number)) {
+            printf("Invalid number. Please enter a number between 1 to 9: ");
+            scanf("%d", &number);
+        } else {
+            isValid = true;
+        }
+    }
+    
+    printf("Valid number entered: %d\n", number);
+    
+    return 0;
+}

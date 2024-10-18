@@ -1,0 +1,35 @@
+#include<stdio.h>
+
+int pow2(int j); // Correct return type and argument type
+
+void main() {
+    int i, flag;
+
+    // Input the number
+    printf("Enter the number: ");
+    scanf("%d", &i);
+
+    // Call the function to check if it is a power of 2
+    flag = pow2(i);
+
+    // Output the result
+    if (flag)
+        printf("\n%d is a power of 2\n", i);
+    else
+        printf("\n%d is not a power of 2\n", i);
+}
+
+// Function to check if a number is a power of 2
+int pow2(int j) {
+    if (j <= 0) 
+        return 0; // Negative numbers and 0 are not powers of 2
+
+    // Keep dividing by 2 until 1 is reached
+    if (j == 1)
+        return 1;  // Reached 1, which means it's a power of 2
+
+    if (j % 2 != 0)
+        return 0;  // Not divisible by 2, so not a power of 2
+
+    return pow2(j / 2);  // Recursive call with j divided by 2
+}

@@ -1,0 +1,30 @@
+//WAP to print'xay'in place of every'a'in a string.
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[20] = "raghav";
+    char s1[50]; // Increased buffer size to store "xay"
+    int i = 0;
+    char *ptr = str;
+
+    while (*ptr) {
+        if (*ptr == 'a') {
+            s1[i++] = 'x';
+            s1[i++] = 'a';
+            s1[i++] = 'y';
+        } else {
+            s1[i++] = *ptr;
+        }
+        ptr++;
+    }
+
+    s1[i] = '\0'; //  putting null character at the end
+
+    strcpy(str, s1); // Copy modified string back to str
+
+    printf("%s\n", str);
+
+    return 0;
+}

@@ -1,0 +1,45 @@
+// WAP to find out the longest word in a string.
+
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void findLongestWord(char str[]) {
+    int maxLength = 0;
+    char longestWord[100] = {0};
+    
+    int currentLength = 0;
+    char currentWord[100] = {0};
+
+    int length = strlen(str);
+
+    for (int i = 0; i <= length; i++) {
+        if (isalpha(str[i])) {
+            currentWord[currentLength] = str[i];
+            currentLength++;
+        } else {
+            currentWord[currentLength] = '\0';
+            if (currentLength > maxLength) {
+                maxLength = currentLength;
+                strcpy(longestWord, currentWord);
+            }
+            currentLength = 0;
+        }
+    }
+
+    printf("The longest word is: %s\n", longestWord);
+}
+
+int main() {
+    char str[256];
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    // Remove newline character if present
+     int length=strlen(str);
+    str[length-1] ='\0';
+
+    findLongestWord(str);
+    return 0;
+}

@@ -1,0 +1,61 @@
+// Write a program to find the greatest among ten numbers.
+
+#include <stdio.h>
+
+// Function to find the maximum number among ten numbers
+int find_MaxNumber(int n1, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10) {
+    int max_number = n1; // Assume the first number is the maximum initially
+    
+    // Compare with each subsequent number
+    if (n2 > max_number) {
+        max_number = n2;
+    }
+    if (n3 > max_number) {
+        max_number = n3;
+    }
+    if (n4 > max_number) {
+        max_number = n4;
+    }
+    if (n5 > max_number) {
+        max_number = n5;
+    }
+    if (n6 > max_number) {
+        max_number = n6;
+    }
+    if (n7 > max_number) {
+        max_number = n7;
+    }
+    if (n8 > max_number) {
+        max_number = n8;
+    }
+    if (n9 > max_number) {
+        max_number = n9;
+    }
+    if (n10 > max_number) {
+        max_number = n10;
+    }
+    
+    return max_number;
+}
+
+int main() {
+    // Initialize ten numbers
+    int num1 = 84;
+    int num2 = 78;
+    int num3 = 89;
+    int num4 = 678;
+    int num5 = 87;
+    int num6 = 785;
+    int num7 = 344;
+    int num8 = 989;
+    int num9 = 783;
+    int num10 = 787;
+    
+    // Call function to find the maximum number among them
+    int max_number = find_MaxNumber(num1, num2, num3, num4, num5, num6, num7, num8, num9, num10);
+    
+    // Print the maximum number
+    printf("The greatest number among the given ten numbers is: %d\n", max_number);
+    
+    return 0;
+}

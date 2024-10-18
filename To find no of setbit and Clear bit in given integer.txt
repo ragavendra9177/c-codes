@@ -1,0 +1,28 @@
+//to findout the no of set and clear bits for given integer
+
+#include <stdio.h>
+
+int main() {
+    int num;
+    int setbit = 0, clearbit = 0; // to count the set and clear bits
+
+    printf("Enter the number: ");
+    scanf("%d", &num);
+
+    int bit = 31; // Start from the most significant bit (bit 31) down to the least significant bit (bit 0)
+    while (bit >= 0) {
+        int result = (num >> bit) & 1;
+        if (result == 1) {
+            setbit++;
+        } else {
+            clearbit++;
+        }
+        bit--;
+    }
+
+    printf("Given number: %d\n", num);
+    printf("Number of set bits: %d\n", setbit);
+    printf("Number of clear bits: %d\n", clearbit);
+
+    return 0;
+}
